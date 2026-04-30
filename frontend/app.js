@@ -4,59 +4,59 @@
 
 const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8000'
-  : 'https://visionsort-backend.up.railway.app'; // Change this after deploying your backend
+  : 'https://web-production-849f70.up.railway.app/';
 let selectedFiles = [];
 let sessionId = null;
 let classificationData = null;
 
 const CAT = {
-  blurred:       { dot: '#60a5fa',  emoji: '◻' },
-  people:        { dot: '#f472b6',  emoji: '◻' },
-  animals:       { dot: '#34d399',  emoji: '◻' },
-  aesthetic:     { dot: '#a78bfa',  emoji: '◻' },
-  uncategorized: { dot: '#fb923c',  emoji: '◻' },
-  unlabelled:    { dot: '#666666',  emoji: '◻' },
+  blurred: { dot: '#60a5fa', emoji: '◻' },
+  people: { dot: '#f472b6', emoji: '◻' },
+  animals: { dot: '#34d399', emoji: '◻' },
+  aesthetic: { dot: '#a78bfa', emoji: '◻' },
+  uncategorized: { dot: '#fb923c', emoji: '◻' },
+  unlabelled: { dot: '#666666', emoji: '◻' },
 };
 
 const PRESETS = {
-  blurred:       [{ v: 'none', l: 'None' }],
-  people:        [{ v: 'none', l: 'None' }, { v: 'portraits', l: 'Portraits' }, { v: 'landscapes', l: 'Landscapes' }],
-  animals:       [{ v: 'none', l: 'None' }, { v: 'landscapes', l: 'Landscapes' }],
-  aesthetic:     [{ v: 'none', l: 'None' }, { v: 'aesthetic', l: 'Aesthetic' }, { v: 'landscapes', l: 'Landscapes' }],
+  blurred: [{ v: 'none', l: 'None' }],
+  people: [{ v: 'none', l: 'None' }, { v: 'portraits', l: 'Portraits' }, { v: 'landscapes', l: 'Landscapes' }],
+  animals: [{ v: 'none', l: 'None' }, { v: 'landscapes', l: 'Landscapes' }],
+  aesthetic: [{ v: 'none', l: 'None' }, { v: 'aesthetic', l: 'Aesthetic' }, { v: 'landscapes', l: 'Landscapes' }],
   uncategorized: [{ v: 'none', l: 'None' }, { v: 'portraits', l: 'Portraits' }, { v: 'landscapes', l: 'Landscapes' }, { v: 'aesthetic', l: 'Aesthetic' }],
-  unlabelled:    [{ v: 'none', l: 'None' }],
+  unlabelled: [{ v: 'none', l: 'None' }],
 };
 
 // ── DOM ──
 const $ = id => document.getElementById(id);
-const dropZone    = $('drop-zone');
-const fileInput   = $('file-input');
+const dropZone = $('drop-zone');
+const fileInput = $('file-input');
 const fileListSec = $('file-list-sec');
-const fileChips   = $('file-chips');
-const fileCount   = $('file-count');
-const actionRow   = $('action-row');
+const fileChips = $('file-chips');
+const fileCount = $('file-count');
+const actionRow = $('action-row');
 const actionCount = $('action-count');
 const btnClassify = $('btn-classify');
-const bcIcon      = $('bc-icon');
-const bcText      = $('bc-text');
-const btnClear    = $('btn-clear');
-const progSec     = $('progress-sec');
-const progFill    = $('prog-fill');
-const progLabel   = $('prog-label');
-const phase1      = $('phase1');
-const phase2      = $('phase2');
-const ph1Btn      = $('ph1-btn');
-const ph2Btn      = $('ph2-btn');
-const presetSec   = $('preset-sec');
+const bcIcon = $('bc-icon');
+const bcText = $('bc-text');
+const btnClear = $('btn-clear');
+const progSec = $('progress-sec');
+const progFill = $('prog-fill');
+const progLabel = $('prog-label');
+const phase1 = $('phase1');
+const phase2 = $('phase2');
+const ph1Btn = $('ph1-btn');
+const ph2Btn = $('ph2-btn');
+const presetSec = $('preset-sec');
 const folderCards = $('folder-cards');
-const btnProcess  = $('btn-process');
-const bpIcon      = $('bp-icon');
-const bpText      = $('bp-text');
-const btnBack     = $('btn-back');
-const resultsSec  = $('results-sec');
+const btnProcess = $('btn-process');
+const bpIcon = $('bp-icon');
+const bpText = $('bp-text');
+const btnBack = $('btn-back');
+const resultsSec = $('results-sec');
 const summaryCards = $('summary-cards');
 const resultsTbody = $('results-tbody');
-const toast       = $('toast');
+const toast = $('toast');
 
 // ── Toast ──
 function showToast(msg) {
