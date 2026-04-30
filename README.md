@@ -5,7 +5,7 @@ VisionSort is a state-of-the-art, AI-powered image organization system designed 
 
 Recently updated with a striking **"Nothing Brand" inspired aesthetic**, the system provides a premium scrollytelling frontend and a robust FastAPI backend.
 
-![VisionSort Hero Preview](frontend/bg.png)
+![VisionSort Hero Preview](frontend/landing_page.png)
 
 ---
 
